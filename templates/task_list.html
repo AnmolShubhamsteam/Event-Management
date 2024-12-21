@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+    <table class="w-full text-left table-auto min-w-max">
+      <thead>
+        <tr>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Name
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Deadline
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Status
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500">
+              Assigned To
+            </p>
+          </th>
+          <th class="p-4 border-b border-slate-300 bg-slate-50">
+            <p class="block text-sm font-normal leading-none text-slate-500"></p>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 border-b border-slate-200">
+            <p class="block text-sm text-slate-800">
+              {{ task.name }}
+            </p>
+          </td>
+          <td class="p-4 border-b border-slate-200">
+            <p class="block text-sm text-slate-800">
+              {{ task.deadline }}
+            </p>
+          </td>
+          <td class="p-4 border-b border-slate-200">
+            <p class="block text-sm text-slate-800">
+              {{ task.status }}
+            </p>
+          </td>
+          <td class="p-4 border-b border-slate-200">
+            <p class="block text-sm text-slate-800">
+              {% if task.assigned_to %}
+                {{ task.assigned_to.name }}
+              {% else %}
+                Unassigned
+              {% endif %}
+            </p>
+          </td>
+          <td class="p-4 border-b border-slate-200">
+            <a href="{% url 'update_task' event.id task.id %}">
+              <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                Update
+              </button>
+            </a>
+            <a href="{% url 'delete_task' event.id task.id %}">
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Delete
+              </button>
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr class="hover:bg-slate-50">
+          <td colspan="5" class="p-4 border-b border-slate-200">
+            <p class="block text-sm text-slate-800 text-center">
+              No tasks available for this event.
+            </p>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <a href="{% url 'add_task' event.id %}">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Create Task
+    </button>
+  </a>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="py-16">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+            <div class="hidden lg:block lg:w-1/2 bg-cover"
+                style="background-image:url('https://www.internationalbrandequity.com/wp-content/uploads/2022/04/event-management-guide.jpg'); background-size: cover; background-position: center;">
+            </div>
+            <div class="w-full p-8 lg:w-1/2">
+                <h2 class="text-2xl font-semibold text-gray-700 text-center">Welcome</h2>
+                <p class="text-xl text-gray-600 text-center">Webknot Team!</p>
+                <p class="text-xl text-gray-600 text-center">
+                    Created By <a href="https://anmol-portfolio-sigma.vercel.app/" class="text-blue-500 font-bold hover:underline">Anmol Shubham</a>
+                </p>
+
+                <!-- Google Sign-in button with alert -->
+                <a href="#" class="flex items-center justify-center mt-4 text-white rounded-lg shadow-md hover:bg-gray-100" aria-label="Sign in with Google" onclick="alert('Sign in with Google feature will be implemented in the future!')">
+                    <div class="px-4 py-3">
+                        <svg class="h-6 w-6" viewBox="0 0 40 40">
+                            <!-- SVG path for Google Icon -->
+                        </svg>
+                    </div>
+                    <h1 class="px-4 py-3 w-5/6 text-center text-gray-600 font-bold">Sign in with Google</h1>
+                </a>
+
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="border-b w-1/5 lg:w-1/4"></span>
+                    <a href="#" class="text-xs text-center text-gray-500 uppercase">or login with email</a>
+                    <span class="border-b w-1/5 lg:w-1/4"></span>
+                </div>
+
+                <!-- Username field -->
+                <div class="mt-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input id="username" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text" name="Username" aria-label="Username" required />
+                    {% if form.username.errors %}
+                        <div class="text-red-500 text-xs mt-1">
+                            {% for error in form.username.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password field -->
+                <div class="mt-4">
+                    <div class="flex justify-between">
+                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <!-- Forgot password link with alert -->
+                        <a href="#" class="text-xs text-gray-500" onclick="alert('Forgot Password feature will be implemented in the future!')">Forget Password?</a>
+                    </div>
+                    <input id="password" class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password" name="Password" aria-label="Password" required />
+                    {% if form.password.errors %}
+                        <div class="text-red-500 text-xs mt-1">
+                            {% for error in form.password.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Submit button -->
+                <div class="mt-8">
+                    <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600" type="submit" aria-label="Login">Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Card 1 -->
+     {% for event in events %}
+    <div class="block max-w-[18rem] rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
+      <div class="relative overflow-hidden bg-cover bg-no-repeat">
+        <!-- Use the provided image URL -->
+        <a href="https://ibb.co/BgVWnyp">
+          <img class="rounded-t-lg" src="https://i.ibb.co/RCprj3F/1198.jpg" alt="1198" border="0" />
+        </a>
+      </div>
+      <div class="p-6">
+        <h5 class="mb-2 text-xl font-medium leading-tight">{{ event.name }}</h5>
+        <p class="text-base">{{ event.description }}</p>
+      </div>
+      <ul class="w-full">
+        <li class="w-full border-b-2 border-neutral-100 border-opacity-100 px-6 py-3 dark:border-white/10"><strong>Date:- </strong>{{ event.date }}</li>
+        <li class="w-full border-b-2 border-neutral-100 border-opacity-100 px-6 py-3 dark:border-white/10"><strong>Location</strong>{{ event.location }}</li>
+      </ul>
+      <div class="p-6">
+        <a href="{% url 'update_event' event_id=event.id %}"><button class="rounded-md bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+          Update
+        </button></a>
+        <a href="{% url 'delete_event' event.id %}"><button class="rounded-md bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+          Delete
+        </button></a>
+        <a href="{% url 'event_task_list' event.id %}"><button class="rounded-md bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+          View task
+        </button></a>
+        <a href="{% url 'attendee_list' event.id %}"><button class="rounded-md bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+          View Attendee
+        </button></a>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock %}
