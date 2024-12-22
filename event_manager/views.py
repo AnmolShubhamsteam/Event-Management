@@ -96,11 +96,23 @@ def add_task(request, event_id):
     
     return render(request, 'add_task.html', {'form': form, 'event': event})
 
-@login_required
 def event_task_list(request, event_id):
-    event = get_object_or_404(Event, id=event_id)  # Get the event by ID
-    tasks = event.tasks.all()  # Fetch all tasks related to the event
-    return render(request, 'task_list.html', {'event': event, 'tasks': tasks})
+    event = get_object_or_404(Event, id=event_id)
+    tasks = Task.objects.filter(event=event)
+    total_tasks = tasks.count()
+    completed_tasks = tasks.filter(status="Completed").count()
+    
+    # Calculate progress as a percentage (avoid division by zero)
+    progress = (completed_tasks / total_tasks * 100) if total_tasks > 0 else 0
+    
+    context = {
+        "event": event,
+        "tasks": tasks,
+        "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
+        "progress": progress,  # Pass the calculated progress to the template
+    }
+    return render(request, "task_list.html", context)
 
 @login_required
 def update_task(request, event_id, task_id):
