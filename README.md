@@ -138,6 +138,9 @@ Visit `http://127.0.0.1:8000` in your web browser to view the application.
 
 ### Access the API 
 - Navigate to `http://127.0.0.1:8000/api`
+- "events": "http://127.0.0.1:8000/api/events/",
+- "attendees": "http://127.0.0.1:8000/api/attendees/",
+- "tasks": "http://127.0.0.1:8000/api/tasks/"
 
 ---
 
