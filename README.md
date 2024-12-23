@@ -111,6 +111,7 @@ python manage.py migrate
 Create an admin user to access the Django admin panel:
 ```bash
 python manage.py createsuperuser
+(you need to use the same username and password at login screen to access all the features)
 ```
 Follow the prompts to set up your superuser credentials.
 
