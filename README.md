@@ -44,7 +44,7 @@ Ensure the following are installed:
 #### On Windows:
 ```bash
 python -m venv env
-env\Scriptsctivate
+env\Scripts\activate
 ```
 
 #### On macOS/Linux:
